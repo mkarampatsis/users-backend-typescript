@@ -2,7 +2,10 @@ import { connectDB } from '../utils/db';
 import Role from '../models/role.model';
 import User from '../models/user.model';
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
 dotenv.config();
+
+const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || '10', 10);
 
 const seed = async () => {
   await connectDB();
@@ -13,9 +16,12 @@ const seed = async () => {
   const editor = await Role.create({ role: 'EDITOR', description: 'Editor', active: true });
   console.log('Roles created');
 
+  const hash = await bcrypt.hash('adminpass', SALT_ROUNDS);
+  console.log("Hashed password",hash);
+
   await User.create({
     username: 'admin',
-    password: 'adminpass',
+    password: hash,
     firstname: 'Admin',
     lastname: 'User',
     email: 'admin@aueb.gr',

@@ -96,11 +96,21 @@ router.get('/:id', authenticate, validateObjectId('id'), userCtrl.getOne);
 *         application/json:
 *           schema:
 *             type: object
+*             properties:
+*               username:
+*                 type: string
+*               password:
+*                 type: string
+*               firstname:
+*                 type: string
+*               lastname:
+*                 type: string
+*               email:
 *     responses:
 *       200:
 *         description: Ο χρήστης ενημερώθηκε
 */
-router.patch('/:id', authenticate, validate(updateUserSchema), validateObjectId('id'), userCtrl.update);
+router.put('/:id', authenticate, validate(updateUserSchema), validateObjectId('id'), userCtrl.update);
 
 /**
 * @openapi

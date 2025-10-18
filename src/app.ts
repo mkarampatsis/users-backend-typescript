@@ -19,6 +19,11 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
+// app.use(cors({
+//   origin: '*'
+//   // origin: ['https://www.section.io', 'https://www.google.com/']
+// }));
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roleRoutes);

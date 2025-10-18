@@ -1,6 +1,9 @@
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import mongooseToSwagger from "mongoose-to-swagger";
 import { Express } from "express";
+import Role from "./models/role.model";
+import User from './models/user.model';
 
 const options: swaggerJSDoc.Options = {
   definition: {
@@ -22,6 +25,10 @@ const options: swaggerJSDoc.Options = {
           scheme: "bearer",
           bearerFormat: "JWT",
         },
+      },
+      "schemas": {
+        User: mongooseToSwagger(User),
+        Role: mongooseToSwagger(Role)
       },
     },
     security: [{ bearerAuth: [] }],

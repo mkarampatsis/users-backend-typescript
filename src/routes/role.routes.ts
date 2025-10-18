@@ -37,6 +37,8 @@ router.get('/', authenticate, roleCtrl.list);
 *                 type: string
 *               active:
 *                 type: boolean
+*               description:
+*                 type: string
 *     responses:
 *       201:
 *         description: Ο ρόλος δημιουργήθηκε
@@ -57,11 +59,24 @@ router.post('/', authenticate, roleCtrl.create);
 *         required: true
 *         schema:
 *           type: string
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             type: object
+*             properties:
+*               role:
+*                 type: string
+*               active:
+*                 type: boolean
+*               description:
+*                 type: string
 *     responses:
 *       200:
 *         description: Ο ρόλος ενημερώθηκε
 */
-router.patch('/:id', authenticate, roleCtrl.update);
+router.put('/:id', authenticate, roleCtrl.update);
 
 /**
 * @openapi

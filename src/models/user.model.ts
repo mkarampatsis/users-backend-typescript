@@ -28,6 +28,47 @@ const UserSchema = new Schema<IUser>({
   },
   phone: [PhoneSchema],
   roles: [{ type: Schema.Types.ObjectId, ref: "Role", required: true }]
-}, { timestamps: true });
+}, 
+{ 
+  collection: 'users',
+  timestamps: true 
+});
 
 export default model<IUser>("User", UserSchema);
+
+
+
+// let userSchema = new Schema({
+//   username: {
+//     type: String, 
+//     required: [ true, 'Username is required field' ], 
+//     max: 100, 
+//     unique:true,
+//     trim:true,
+// 		lowercase:true, 
+//   },
+//   password: {type: String, required: [true, 'Password is required field'], max: 100},
+//   name: {type: String, required: [ true, 'Name is required field' ], max: 100},
+//   surname: {type: String, required: [ true, 'Surname is required field' ], max: 100},
+//   email: {
+//     type: String, 
+//     required: [true, 'Email is required field'], 
+//     max: 100, 
+//     unique:true,
+//     trim:true,
+// 		lowercase:true, 
+//     // validate: [validateEmail, "Please fill a valid email address"],
+//     match: [
+//       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+//       "Email address is not valid",
+//     ],
+//   },
+//   address: addressSchema,
+//   phone: { type:[phoneSchema], null: true },
+//   roles:{type:[String], null:true},
+//   products: { type: [productSchema], null: true  }
+// },
+// { 
+//   collection: 'users',
+//   timestamps: true 
+// });

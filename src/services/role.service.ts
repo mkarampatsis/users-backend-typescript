@@ -18,6 +18,7 @@ export const findRoleById = async (id: string) => {
 };
 
 export const updateRole = async (id: string, payload: Partial<IRole>) => {
+  console.log(id, payload);
   return Role.findByIdAndUpdate(id, payload, { new: true });
 };
 

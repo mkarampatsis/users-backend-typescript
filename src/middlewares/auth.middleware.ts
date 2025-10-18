@@ -23,3 +23,13 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
     return res.status(401).json({ message: 'Invalid token' });
   }
 };
+
+// declare global
+// You are saying:
+// “For all Express Request objects in my project, add an optional property called user.”
+// Now, TypeScript globally knows that every Request can have a user field.
+// After merging, the Request interface effectively becomes:
+// interface Request {
+//   // built-in properties (headers, params, body, etc.)
+//   user?: any; // added by you
+// }
