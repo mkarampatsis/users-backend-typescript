@@ -1,6 +1,6 @@
 import request from 'supertest';
-import app from '../src/app';
-import { connectDB } from '../src/utils/db';
+import app from '../app';
+import { connectDB } from '../utils/db';
 
 beforeAll(async () => {
   if (!process.env.MONGO_URI) {

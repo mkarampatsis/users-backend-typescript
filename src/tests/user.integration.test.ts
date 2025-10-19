@@ -1,9 +1,13 @@
 import { TestServer } from './testSetup';
-import userRouter from '../src/routes/user.routes';
-import User from '../src/models/user.model';
+import userRouter from '../routes/user.routes';
+import User from '../models/user.model';
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from '../src/config';
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET || 'test_secret';;
 
 const server = new TestServer();
 server.app.use('/users', userRouter);
@@ -29,7 +33,7 @@ describe('👤 User API Tests', () => {
   test('POST /users -> δημιουργεί νέο χρήστη', async () => {
     const res = await server.request.post('/users')
       .set('Authorization', `Bearer ${token}`)
-      .send({ username: 'newuser', password: '12345' });
+      .send({ username: 'newuser', password: '123456' });
     expect(res.status).toBe(201);
     expect(res.body.username).toBe('newuser');
   });

@@ -9,7 +9,6 @@ const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || '10', 10);
 // https://www.typescriptlang.org/docs/handbook/utility-types.html
 export const createUser = async (payload: Partial<IUser>) => {
   if (payload.password) {
-    console.log(payload.password);
     const hash = await bcrypt.hash(payload.password, SALT_ROUNDS);
     payload.password = hash;
   }

@@ -9,5 +9,6 @@ export default {
   setupFilesAfterEnv: ['<rootDir>/tests/testSetup.ts'],
   transform: { '^.+\\.tsx?$': 'ts-jest' },
   coveragePathIgnorePatterns: ['/node_modules/'],
-  runInBand: true
+  runInBand: true,
+  collectCoverage: true,
 };

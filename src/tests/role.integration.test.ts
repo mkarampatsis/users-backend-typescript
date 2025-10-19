@@ -1,14 +1,18 @@
 import { TestServer } from './testSetup';
-import roleRouter from '../src/routes/role.routes';
+import roleRouter from '../routes/role.routes';
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from '../src/config';
-import User from '../src/models/user.model';
+import User from '../models/user.model';
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET || 'test_secret';;
 
 const server = new TestServer();
 server.app.use('/roles', roleRouter);
 
-describe('🧩 Role API Tests', () => {
+describe('Role API Tests', () => {
   let token: string;
 
   beforeAll(async () => {

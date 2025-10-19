@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 
 export class TestServer {
   public app: Express;
-  public request: supertest.SuperTest<supertest.Test>;
+  public request: ReturnType<typeof supertest>;
   private mongoServer?: MongoMemoryServer;
 
   constructor() {
