@@ -16,7 +16,12 @@ const options: swaggerJSDoc.Options = {
     servers: [
       {
         url: "http://localhost:3000/api",
+        description: 'Local Server'
       },
+      {
+        url: "https://users-backend-typescript.onrender.com/api",
+        description: 'Render Server'
+      }
     ],
     components: {
       securitySchemes: {
