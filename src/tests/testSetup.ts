@@ -29,7 +29,10 @@ export class TestServer {
   async cleanup() {
     const collections = mongoose.connection.collections;
     for (const key in collections) {
-      await collections[key].deleteMany({});
+      const collection = collections[key];
+      if (collection) {
+        await collection.deleteMany({});
+      }
     }
   }
 }

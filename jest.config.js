@@ -2,11 +2,11 @@
 export default {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  roots: ['<rootDir>/tests'],
+  roots: ['<rootDir>/src/tests'],
   moduleFileExtensions: ['ts', 'js', 'json'],
   testMatch: ['**/*.test.ts'],
   verbose: true,
-  setupFilesAfterEnv: ['<rootDir>/tests/testSetup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/tests/testSetup.ts'],
   transform: { '^.+\\.tsx?$': 'ts-jest' },
   coveragePathIgnorePatterns: ['/node_modules/'],
   runInBand: true,

@@ -2,6 +2,8 @@ import User from '../models/user.model';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt'
+import AuthPayload from '../models/auth.model';
+
 dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'change_me';
@@ -17,9 +19,11 @@ export const register = async (data: any) => {
 export const login = async (username: string, password: string) => {
   const user = await User.findOne({ username }).populate('roles');
   if (!user) return null;
+  
   const match = await bcrypt.compare(password, user.password);
   if (!match) return null;
-  const payload = { id: user._id, username: user.username, roles: user.roles };
+  
+  const payload: AuthPayload = { username: user.username, email: user.email || '', roles: user.roles };
   const token = jwt.sign(payload as any, JWT_SECRET, { expiresIn: JWT_EXPIRES });
   return { user, token };
 };

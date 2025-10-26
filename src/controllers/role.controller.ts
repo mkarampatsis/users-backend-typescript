@@ -17,14 +17,14 @@ export const list = async (_req: Request, res: Response, next: NextFunction) => 
 
 export const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const r = await roleService.updateRole(req.params.id, req.body);
+    const r = await roleService.updateRole(req.params.id!, req.body);
     res.json(r);
   } catch (err) { next(err); }
 };
 
 export const remove = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const r = await roleService.deleteRole(req.params.id);
+    const r = await roleService.deleteRole(req.params.id!);
     res.json({ deleted: !!r });
   } catch (err) { next(err); }
 };

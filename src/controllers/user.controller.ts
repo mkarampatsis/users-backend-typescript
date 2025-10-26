@@ -19,7 +19,14 @@ export const list = async (req: Request, res: Response, next: NextFunction) => {
 
 export const getOne = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await userService.findUserById(req.params.id);
+    // To είχαμε έτσι και εμφάνιζε μήνυμα για req.params.id γιατί μπορεί να μην υπάρχει
+    // const user = await userService.findUserById(req.params.id);
+    // Δύο λύσεις ή req.params.id! ή
+    // if (!req.params.id) {
+    //   return res.status(400).json({ message: 'Missing user ID' });
+    // }
+    // const user = await userService.findUserById(req.params.id);
+    const user = await userService.findUserById(req.params.id!);
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.json(user);
   } catch (err) { next(err); }
@@ -27,14 +34,14 @@ export const getOne = async (req: Request, res: Response, next: NextFunction) =>
 
 export const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await userService.updateUser(req.params.id, req.body);
+    const user = await userService.updateUser(req.params.id!, req.body);
     res.json(user);
   } catch (err) { next(err); }
 };
 
 export const remove = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const r = await userService.deleteUser(req.params.id);
+    const r = await userService.deleteUser(req.params.id!);
     res.json({ deleted: !!r });
   } catch (err) { next(err); }
 };
