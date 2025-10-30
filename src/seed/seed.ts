@@ -14,6 +14,7 @@ const seed = async () => {
 
   const reader = await Role.create({ role: 'READER', description: 'Default reader role', active: true });
   const editor = await Role.create({ role: 'EDITOR', description: 'Editor', active: true });
+  const admin = await Role.create({ role: 'ADMIN', description: 'ADMIN', active: true });
   console.log('Roles created');
 
   const hash = await bcrypt.hash('adminpass', SALT_ROUNDS);
@@ -25,7 +26,7 @@ const seed = async () => {
     firstname: 'Admin',
     lastname: 'User',
     email: 'admin@aueb.gr',
-    roles: [reader._id, editor._id]
+    roles: [reader._id, editor._id, admin._id]
   });
 
   console.log('Seed finished');

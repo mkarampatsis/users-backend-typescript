@@ -4,9 +4,9 @@ import { validate } from '../middlewares/validate.middleware';
 import { createUserSchema, updateUserSchema } from '../validators/user.validator';
 import { validateObjectId } from '../middlewares/validateObjectId.middleware';
 import { authenticate } from '../middlewares/auth.middleware';
+import { hasAdminRole } from '../middlewares/user.middleware';
 
 const router = Router();
-
 
 /**
 * @openapi
@@ -51,7 +51,7 @@ router.get('/', authenticate, userCtrl.list);
 *       201:
 *         description: Ο χρήστης δημιουργήθηκε
 */
-router.post('/', validate(createUserSchema), userCtrl.create); // public
+router.post('/', authenticate, hasAdminRole, validate(createUserSchema), userCtrl.create); // public
 
 
 /**
@@ -74,7 +74,7 @@ router.post('/', validate(createUserSchema), userCtrl.create); // public
 *       404:
 *         description: Ο χρήστης δεν βρέθηκε
 */
-router.get('/:id', authenticate, validateObjectId('id'), userCtrl.getOne);
+router.get('/:id', authenticate, hasAdminRole, validateObjectId('id'), userCtrl.getOne);
 
 /**
 * @openapi
@@ -110,7 +110,7 @@ router.get('/:id', authenticate, validateObjectId('id'), userCtrl.getOne);
 *       200:
 *         description: Ο χρήστης ενημερώθηκε
 */
-router.put('/:id', authenticate, validate(updateUserSchema), validateObjectId('id'), userCtrl.update);
+router.put('/:id', authenticate, hasAdminRole, validate(updateUserSchema), validateObjectId('id'), userCtrl.update);
 
 /**
 * @openapi
@@ -132,6 +132,6 @@ router.put('/:id', authenticate, validate(updateUserSchema), validateObjectId('i
 *       404:
 *         description: Ο χρήστης δεν βρέθηκε
 */
-router.delete('/:id', authenticate, validateObjectId('id'), userCtrl.remove);
+router.delete('/:id', authenticate, hasAdminRole, validateObjectId('id'), userCtrl.remove);
 
 export default router;

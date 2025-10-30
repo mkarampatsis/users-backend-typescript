@@ -14,6 +14,7 @@ export const createUser = async (payload: Partial<IUser>) => {
   }
 
   let roleIds: Types.ObjectId[] = [];
+  console.log("Create User", payload);
   if (payload.roles && payload.roles.length > 0) {
     roleIds = payload.roles as any;
   } else {
