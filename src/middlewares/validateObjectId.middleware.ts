@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 
 export const validateObjectId = 
+  // If no argument is passed when calling validateObjectId(...), use 'id' as the default value
   (param = 'id') => 
     (req: Request, res: Response, next: NextFunction) => {
       const value = req.params[param];
@@ -10,8 +11,3 @@ export const validateObjectId =
       }
       next();
     };
-
-// “If no argument is passed when calling validateObjectId(...), use 'id' as the default value.”
-// So:
-// When you call validateObjectId('id') → param becomes 'id'
-// When you call validateObjectId() (no argument) → param also becomes 'id', because that’s the default
