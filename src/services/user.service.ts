@@ -1,5 +1,5 @@
 import User, { IUser } from '../models/user.model';
-import Role from '../models/role.model';
+import Role, { IRole } from '../models/role.model';
 import { Types } from 'mongoose';
 import bcrypt from 'bcrypt';
 
@@ -18,7 +18,7 @@ export const createUser = async (payload: Partial<IUser>) => {
   if (payload.roles && payload.roles.length > 0) {
     roleIds = payload.roles as any;
   } else {
-    let reader = await Role.findOne({ role: 'READER' });
+    let reader: IRole | null = await Role.findOne({ role: 'READER' });
     if (!reader) {
       reader = await Role.create({ role: 'READER', description: 'Default reader role', active: true });
     }

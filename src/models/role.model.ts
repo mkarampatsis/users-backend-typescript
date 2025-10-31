@@ -1,6 +1,7 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, Types } from "mongoose";
 
 export interface IRole extends Document {
+  _id: Types.ObjectId;
   role: string;
   description?: string;
   active: boolean;
