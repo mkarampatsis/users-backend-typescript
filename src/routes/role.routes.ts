@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import * as roleCtrl from '../controllers/role.controller';
 import { authenticate } from '../middlewares/auth.middleware';
+import { createRoleSchema, updateRoleSchema } from '../validators/role.validator';
+import { validate } from '../middlewares/validate.middleware';
+import { validateObjectId } from '../middlewares/validateObjectId.middleware';
 
 const router = Router();
 
@@ -43,7 +46,7 @@ router.get('/', authenticate, roleCtrl.list);
 *       201:
 *         description: Ο ρόλος δημιουργήθηκε
 */
-router.post('/', authenticate, roleCtrl.create);
+router.post('/', authenticate, validate(createRoleSchema), roleCtrl.create);
 
 /**
  * @openapi
@@ -76,7 +79,7 @@ router.post('/', authenticate, roleCtrl.create);
 *       200:
 *         description: Ο ρόλος ενημερώθηκε
 */
-router.put('/:id', authenticate, roleCtrl.update);
+router.put('/:id', authenticate, validate(updateRoleSchema), validateObjectId('id'), roleCtrl.update);
 
 /**
 * @openapi
@@ -96,6 +99,6 @@ router.put('/:id', authenticate, roleCtrl.update);
 *       200:
 *         description: Ο ρόλος διαγράφηκε
 */
-router.delete('/:id', authenticate, roleCtrl.remove);
+router.delete('/:id', authenticate, validateObjectId('id'), roleCtrl.remove);
 
 export default router;
