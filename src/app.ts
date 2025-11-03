@@ -19,10 +19,10 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
-// app.use(cors({
-//   origin: '*'
-//   // origin: ['https://www.section.io', 'https://www.google.com/']
-// }));
+app.use(cors({
+  // origin: '*'
+  origin: ['http://localhost:4200']
+}));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
