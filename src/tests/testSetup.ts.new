@@ -1,0 +1,55 @@
+import express, { Express } from "express";
+import bodyParser from "body-parser";
+import supertest from "supertest";
+import mongoose from "mongoose";
+import { MongoMemoryServer } from "mongodb-memory-server";
+import { Server } from "http";
+import userRoutes from "../routes/user.routes"; // example — include your routes
+
+export class TestServer {
+  public app: Express;
+  public request: ReturnType<typeof supertest>;
+  private mongoServer?: MongoMemoryServer;
+  private httpServer?: Server; //store express listener if needed
+
+  constructor() {
+    this.app = express();
+    this.app.use(bodyParser.json());
+
+    // Register routes explicitly (not via `app.listen`)
+    this.app.use("/users", userRoutes);
+
+    this.request = supertest(this.app);
+  }
+
+  async start() {
+    this.mongoServer = await MongoMemoryServer.create();
+    const uri = this.mongoServer.getUri();
+    await mongoose.connect(uri);
+
+    // Optional: start listening on a random port for integration-level tests
+    this.httpServer = this.app.listen(0);
+  }
+
+  async stop() {
+    // Close the HTTP server if it was started
+    if (this.httpServer) {
+      await new Promise<void>((resolve, reject) => {
+        this.httpServer!.close(err => (err ? reject(err) : resolve()));
+      });
+    }
+
+    // Disconnect from MongoDB
+    await mongoose.disconnect();
+
+    // Stop MongoMemoryServer
+    if (this.mongoServer) await this.mongoServer.stop();
+  }
+
+  async cleanup() {
+    const collections = mongoose.connection.collections;
+    for (const key in collections) {
+      await collections[key].deleteMany({});
+    }
+  }
+}
