@@ -37,6 +37,10 @@ export const findUserById = async (id: string) => {
   return User.findById(id).populate('roles').lean();
 };
 
+export const findUserByEmail = async (email: string) => {
+  return User.findOne({email:email}).populate('roles').lean();
+};
+
 export const findUserByUsername = async (username: string) => {
   return User.findOne({ username }).populate('roles');
 };

@@ -45,3 +45,18 @@ export const remove = async (req: Request, res: Response, next: NextFunction) =>
     res.json({ deleted: !!r });
   } catch (err) { next(err); }
 };
+
+export const getOneByEmail = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // To είχαμε έτσι και εμφάνιζε μήνυμα για req.params.id γιατί μπορεί να μην υπάρχει
+    // const user = await userService.findUserById(req.params.id);
+    // Δύο λύσεις ή req.params.id! ή
+    // if (!req.params.id) {
+    //   return res.status(400).json({ message: 'Missing user ID' });
+    // }
+    // const user = await userService.findUserById(req.params.id);
+    const user = await userService.findUserByEmail(req.params.email!);
+    if (!user) return res.status(200).json({ message: 'User found' });
+    res.status(401).json(user);
+  } catch (err) { next(err); }
+};
