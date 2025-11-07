@@ -45,12 +45,12 @@ export const findUserByUsername = async (username: string) => {
   return User.findOne({ username }).populate('roles');
 };
 
-export const updateUser = async (id: string, payload: Partial<IUser>) => {
+export const updateUser = async (username: string, payload: Partial<IUser>) => {
   if (payload.password) {
     const hash = await bcrypt.hash(payload.password, SALT_ROUNDS);
     payload.password = hash;
   }
-  return User.findByIdAndUpdate(id, payload, { new: true }).populate('roles');
+  return User.findOne({username:username}, { new: true }).populate('roles');
 };
 
 export const deleteUser = async (id: string) => {

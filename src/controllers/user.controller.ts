@@ -34,7 +34,7 @@ export const getOne = async (req: Request, res: Response, next: NextFunction) =>
 
 export const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await userService.updateUser(req.params.id!, req.body);
+    const user = await userService.updateUser(req.params.username!, req.body);
     res.json(user);
   } catch (err) { next(err); }
 };

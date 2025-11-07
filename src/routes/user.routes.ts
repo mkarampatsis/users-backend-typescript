@@ -110,7 +110,7 @@ router.get('/:id', authenticate, hasAdminRole, validateObjectId('id'), userCtrl.
 *       200:
 *         description: Ο χρήστης ενημερώθηκε
 */
-router.put('/:id', authenticate, hasAdminRole, validate(updateUserSchema), validateObjectId('id'), userCtrl.update);
+router.put('/:username', authenticate, hasAdminRole, validate(updateUserSchema), userCtrl.update);
 
 /**
 * @openapi
@@ -135,4 +135,5 @@ router.put('/:id', authenticate, hasAdminRole, validate(updateUserSchema), valid
 router.delete('/:id', authenticate, hasAdminRole, validateObjectId('id'), userCtrl.remove);
 
 router.get('/email/:email', authenticate, hasAdminRole, userCtrl.getOneByEmail);
+
 export default router;
