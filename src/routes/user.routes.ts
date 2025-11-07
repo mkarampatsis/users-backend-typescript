@@ -134,5 +134,5 @@ router.put('/:id', authenticate, hasAdminRole, validate(updateUserSchema), valid
 */
 router.delete('/:id', authenticate, hasAdminRole, validateObjectId('id'), userCtrl.remove);
 
-router.get('/check_duplicate_email/:email', authenticate, hasAdminRole, userCtrl.getOneByEmail);
+router.get('/email/:email', authenticate, hasAdminRole, userCtrl.getOneByEmail);
 export default router;
