@@ -1,13 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import * as userService from '../services/user.service';
 
-export const create = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const user = await userService.createUser(req.body);
-    res.status(201).json(user);
-  } catch (err) { next(err); }
-};
-
 export const list = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const filter: any = {};
@@ -32,6 +25,21 @@ export const getOne = async (req: Request, res: Response, next: NextFunction) =>
   } catch (err) { next(err); }
 };
 
+export const getOneByEmail = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = await userService.findUserByEmail(req.params.email!);
+    if (user) return res.status(200).json(user);
+    res.status(401).json({message:"Not Found"});
+  } catch (err) { next(err); }
+};
+
+export const create = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = await userService.createUser(req.body);
+    res.status(201).json(user);
+  } catch (err) { next(err); }
+};
+
 export const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await userService.updateUser(req.params.username!, req.body);
@@ -41,15 +49,7 @@ export const update = async (req: Request, res: Response, next: NextFunction) =>
 
 export const remove = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const r = await userService.deleteUser(req.params.id!);
+    const r = await userService.deleteUser(req.params.username!);
     res.json({ deleted: !!r });
-  } catch (err) { next(err); }
-};
-
-export const getOneByEmail = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const user = await userService.findUserByEmail(req.params.email!);
-    if (user) return res.status(200).json(user);
-    res.status(401).json({message:"Not Found"});
   } catch (err) { next(err); }
 };

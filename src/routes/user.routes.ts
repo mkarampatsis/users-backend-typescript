@@ -24,6 +24,50 @@ router.get('/', authenticate, userCtrl.list);
 
 /**
 * @openapi
+* /users/{id}:
+*   get:
+*     summary: Βρες χρήστη με βάση το ID
+*     tags: [Users]
+*     security:
+*       - bearerAuth: []
+*     parameters:
+*       - in: path
+*         name: id
+*         required: true
+*         schema:
+*           type: string
+*     responses:
+*       200:
+*         description: Επιστρέφει τον χρήστη
+*       404:
+*         description: Ο χρήστης δεν βρέθηκε
+*/
+router.get('/:id', authenticate, hasAdminRole, validateObjectId('id'), userCtrl.getOne);
+
+/**
+* @openapi
+* /users/email/{email}:
+*   get:
+*     summary: Βρες χρήστη με βάση το Email
+*     tags: [Users]
+*     security:
+*       - bearerAuth: []
+*     parameters:
+*       - in: path
+*         name: email
+*         required: true
+*         schema:
+*           type: string
+*     responses:
+*       200:
+*         description: Επιστρέφει τον χρήστη
+*       404:
+*         description: Ο χρήστης δεν βρέθηκε
+*/
+router.get('/email/:email', authenticate, hasAdminRole, userCtrl.getOneByEmail);
+
+/**
+* @openapi
 * /users:
 *   post:
 *     summary: Δημιουργία νέου χρήστη
@@ -53,32 +97,9 @@ router.get('/', authenticate, userCtrl.list);
 */
 router.post('/', authenticate, hasAdminRole, validate(createUserSchema), userCtrl.create); // public
 
-
 /**
 * @openapi
-* /users/{id}:
-*   get:
-*     summary: Βρες χρήστη με βάση το ID
-*     tags: [Users]
-*     security:
-*       - bearerAuth: []
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Επιστρέφει τον χρήστη
-*       404:
-*         description: Ο χρήστης δεν βρέθηκε
-*/
-router.get('/:id', authenticate, hasAdminRole, validateObjectId('id'), userCtrl.getOne);
-
-/**
-* @openapi
-* /users/{id}:
+* /users/{username}:
 *   put:
 *     summary: Ενημέρωση χρήστη
 *     tags: [Users]
@@ -86,7 +107,7 @@ router.get('/:id', authenticate, hasAdminRole, validateObjectId('id'), userCtrl.
 *       - bearerAuth: []
 *     parameters:
 *       - in: path
-*         name: id
+*         name: username
 *         required: true
 *         schema:
 *           type: string
@@ -114,7 +135,7 @@ router.put('/:username', authenticate, hasAdminRole, validate(updateUserSchema),
 
 /**
 * @openapi
-* /users/{id}:
+* /users/{username}:
 *   delete:
 *     summary: Διαγραφή χρήστη
 *     tags: [Users]
@@ -122,7 +143,7 @@ router.put('/:username', authenticate, hasAdminRole, validate(updateUserSchema),
 *       - bearerAuth: []
 *     parameters:
 *       - in: path
-*         name: id
+*         name: username
 *         required: true
 *         schema:
 *           type: string
@@ -132,8 +153,6 @@ router.put('/:username', authenticate, hasAdminRole, validate(updateUserSchema),
 *       404:
 *         description: Ο χρήστης δεν βρέθηκε
 */
-router.delete('/:id', authenticate, hasAdminRole, validateObjectId('id'), userCtrl.remove);
-
-router.get('/email/:email', authenticate, hasAdminRole, userCtrl.getOneByEmail);
+router.delete('/:username', authenticate, hasAdminRole, userCtrl.remove);
 
 export default router;
