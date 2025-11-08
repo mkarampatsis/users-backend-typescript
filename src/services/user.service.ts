@@ -50,7 +50,7 @@ export const updateUser = async (username: string, payload: Partial<IUser>) => {
     const hash = await bcrypt.hash(payload.password, SALT_ROUNDS);
     payload.password = hash;
   }
-  return User.findOne({username:username}, { new: true }).populate('roles');
+  return User.findOneAndUpdate({username:username}, payload, { new: true }).populate('roles');
 };
 
 export const deleteUser = async (username: string) => {

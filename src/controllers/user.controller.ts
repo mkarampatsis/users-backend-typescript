@@ -43,13 +43,13 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
 export const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await userService.updateUser(req.params.username!, req.body);
-    res.json(user);
+    res.status(201).json(user);
   } catch (err) { next(err); }
 };
 
 export const remove = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const r = await userService.deleteUser(req.params.username!);
-    res.json({ deleted: !!r });
+    res.status(201).json({ deleted: !!r });
   } catch (err) { next(err); }
 };
