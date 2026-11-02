@@ -19,6 +19,16 @@ export const findUsers = async () => {
   return users.map(u => toUserResponseDTO(u));
 };
 
+// toUserResponseDTO converts a user object from your data layer (IUser) into the shape your API returns (UserResponseDTO).
+
+// It:
+// - Converts _id to a string.
+// - Copies username.
+// - Includes firstname, lastname, email, and address only when each value is truthy.
+// - Includes phone only when present, mapping each phone entry to just its type and number.
+// - Converts each role with RoleMapper.toDTO.
+// So it acts as a mapper/serializer: it chooses which user fields are exposed in the response and transforms some of them. For example, fields such as passwords or internal database data won’t be returned unless you explicitly add them.
+
 export const findUserById = async (id: string) => {
   const user = await userDAO.findById(id);
   if (user) {

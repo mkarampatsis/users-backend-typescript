@@ -20,3 +20,11 @@ export const toUserResponseDTO = (user: IUser): UserResponseDTO => {
     roles: user.roles.map(role => RoleMapper.toDTO(role))
   };
 };
+
+// That’s a conditional object spread.
+// ...(user.firstname && { firstname: user.firstname })
+// It means: if user.firstname is truthy, spread { firstname: user.firstname } into the returned object. If it’s falsy, spread nothing.
+
+// For example, if user.firstname is "Sam", the result includes:
+// { firstname: "Sam" }
+// If it’s undefined, null, or an empty string (""), the firstname property is omitted.
