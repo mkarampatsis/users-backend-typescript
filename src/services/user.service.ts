@@ -29,6 +29,12 @@ export const findUsers = async () => {
 // - Converts each role with RoleMapper.toDTO.
 // So it acts as a mapper/serializer: it chooses which user fields are exposed in the response and transforms some of them. For example, fields such as passwords or internal database data won’t be returned unless you explicitly add them.
 
+// if we had 
+// export const findUsers = async () => {
+//   return await userDAO.findAll();
+// };
+// it will return the database/user objects as they are, without converting them to UserResponseDTO. That may expose internal fields (for example, database IDs or password-related fields) and return a different shape than your API response type.
+
 export const findUserById = async (id: string) => {
   const user = await userDAO.findById(id);
   if (user) {
