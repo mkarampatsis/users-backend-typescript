@@ -12,8 +12,11 @@ export const getAll = async (req: Request, res: Response, next: NextFunction) =>
   }
 };
 
-export const getOneById = async (req: Request, res: Response, next: NextFunction) => {
+export const getOneById = async (req: Request<{ id: string }>, res: Response, next: NextFunction) => {
   try {
+    // Δύο τρόποι για να μην βγάζει error στο const id: string = req.params.id!;
+    // ο ένας στο request να βάλω <{ id: string }> αντί μόνο req: Request
+    // Ο άλλος όπως πιο κάτω στο email να κάνω έλεγχο για την μεταβλητή με if (typeof param !== "string") 
     const id: string = req.params.id!;
     const result = await userService.findUserById(id);
     if (!result) return res.status(404).json({ message: 'User not found by id' });
@@ -25,7 +28,11 @@ export const getOneById = async (req: Request, res: Response, next: NextFunction
 
 export const getOneByEmail = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const email: string = req.params.email!;
+    const param = req.params.email;
+    if (typeof param !== "string") {
+      throw new Error("Expected one email parameter");
+    }
+    const email: string = param;
     const result = await userService.findUserByEmail(email);
     if (!result) return res.status(404).json({ message: 'User not found by email' });
     res.status(200).json(result);
