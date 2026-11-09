@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.41% </span>
+                <span class="strong">35.89% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/39</span>
+                <span class='fraction'>14/39</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">44.44% </span>
+                <span class="strong">7.14% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/9</span>
+                <span class='fraction'>1/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.94% </span>
+                <span class="strong">32.35% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/34</span>
+                <span class='fraction'>11/34</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -140,38 +140,38 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -236,33 +236,33 @@ export const register = <span class="fstat-no" title="function not covered" >asy
 <span class="cstat-no" title="statement not covered" >  return user;</span>
 };
 &nbsp;
-export const login = async (username: string, password: string) =&gt; {
-  const user = await User.findOne({ username }).populate('roles');
-  <span class="missing-if-branch" title="if path not taken" >I</span>if (!user) <span class="cstat-no" title="statement not covered" >return null;</span>
+export const login = <span class="fstat-no" title="function not covered" >async </span>(username: string, password: string) =&gt; {
+  const user = <span class="cstat-no" title="statement not covered" >await User.findOne({ username }).populate('roles');</span>
+<span class="cstat-no" title="statement not covered" >  if (!user) <span class="cstat-no" title="statement not covered" >return null;</span></span>
   
-  const match = await bcrypt.compare(password, user.password);
-  if (!match) return null;
+  const match = <span class="cstat-no" title="statement not covered" >await bcrypt.compare(password, user.password);</span>
+<span class="cstat-no" title="statement not covered" >  if (!match) <span class="cstat-no" title="statement not covered" >return null;</span></span>
   
-  const payload: AuthPayload = { username: user.username, email: user.email || '', roles: user.roles };
-  const token = jwt.sign(payload as any, JWT_SECRET, { expiresIn: JWT_EXPIRES });
-  return { user, token };
+  const payload: AuthPayload = <span class="cstat-no" title="statement not covered" >{ username: user.username, email: user.email || '', roles: user.roles };</span>
+  const token = <span class="cstat-no" title="statement not covered" >jwt.sign(payload as any, JWT_SECRET, { expiresIn: JWT_EXPIRES });</span>
+<span class="cstat-no" title="statement not covered" >  return { user, token };</span>
 };
 &nbsp;
 export const googleLogin = <span class="fstat-no" title="function not covered" >async(</span>idToken:string) =&gt;{
 <span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!idToken) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!idToken) {</span>
       // return res.status(400).json({ error: 'Missing idToken' });
 <span class="cstat-no" title="statement not covered" >      return {status: false, message:"Missing idToken"};</span>
     }
 &nbsp;
     const googleUser = <span class="cstat-no" title="statement not covered" >await verifyGoogleIdToken(idToken);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!googleUser.email_verified) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!googleUser.email_verified) {</span>
 <span class="cstat-no" title="statement not covered" >      return {status: false, message:"Email not verified"};</span>
     }
     
     let user = <span class="cstat-no" title="statement not covered" >await User.findOne({ email: googleUser.email });</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!user) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!user) {</span>
       // user = new User({
       //   username: googleUser.email,
       //   email: googleUser.email,
@@ -301,7 +301,7 @@ export const googleLogin = <span class="fstat-no" title="function not covered" >
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-04-21T15:37:46.325Z
+                at 2026-11-09T05:09:18.165Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

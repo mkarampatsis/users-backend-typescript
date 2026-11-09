@@ -24,7 +24,7 @@ app.use(cors({
   origin: ['http://localhost:4200']
 }));
 
-app.use('/api/auth', authRoutes);
+// app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roleRoutes);
 
