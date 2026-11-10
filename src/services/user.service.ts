@@ -3,7 +3,7 @@ import Role, { IRole } from '../models/role.model';
 import * as userDAO from '../dao/user.dao';
 import { Types } from 'mongoose';
 import bcrypt from 'bcrypt';
-import { toUserResponseDTO } from '../mappers/user.mapper';
+// import { toUserResponseDTO } from '../mappers/user.mapper';
 import { AppError } from '../utils/appError';
 import { CreateUserDTO, UpdateUserDTO } from '../dto/user.dto';
 
@@ -16,7 +16,8 @@ export const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || '10', 10);
 // Η .lean() είναι μια επιλογή ερωτήματος που επιστρέφει απλά αντικείμενα JavaScript (POJO) αντί για Mongoose Document. Βελτιώνει σημαντικά την απόδοση και μειώνει τη χρήση μνήμης (συχνά έως και 10 φορές πιο γρήγορα) παρακάμπτοντας την παρακολούθηση αλλαγών και την επικύρωση του Mongoose, καθιστώντας την ιδανική για αιτήματα GET μόνο για ανάγνωση.
 export const findUsers = async () => {
   const users = await userDAO.findAll();
-  return users.map(u => toUserResponseDTO(u));
+  return users
+  // return users.map(u => toUserResponseDTO(u));
 };
 
 // toUserResponseDTO converts a user object from your data layer (IUser) into the shape your API returns (UserResponseDTO).
@@ -38,7 +39,8 @@ export const findUsers = async () => {
 export const findUserById = async (id: string) => {
   const user = await userDAO.findById(id);
   if (user) {
-    return toUserResponseDTO(user); 
+    return user
+    // return toUserResponseDTO(user); 
   }
     
 };
@@ -46,7 +48,8 @@ export const findUserById = async (id: string) => {
 export const findUserByEmail = async (email: string) => {
   const user = await userDAO.findByEmail(email);
   if (user) {
-    return toUserResponseDTO(user); 
+    return user
+    // return toUserResponseDTO(user); 
   }
 };
 
@@ -79,7 +82,8 @@ export const createUser = async (payload: Partial<CreateUserDTO>) => {
     ...payload,
     roles: roleIds
   });
-  return toUserResponseDTO(user);
+  return user
+  // return toUserResponseDTO(user);
 };
 
 
@@ -101,7 +105,8 @@ export const updateUser = async (username: string, payload: UpdateUserDTO) => {
   }
 
   const user = await userDAO.updateUser(username, updateData);
-  return user ? toUserResponseDTO(user) : null;
+  // return user ? toUserResponseDTO(user) : null;
+  return user;
 };
 
 export const deleteUser = async (username: string) => {

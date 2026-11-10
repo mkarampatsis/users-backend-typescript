@@ -42,6 +42,10 @@ export const googleLogin = async(idToken:string) =>{
       return {status: false, message:"Email not verified"};
     }
     
+    if (!googleUser.email) {
+      return { status: false, message: "Google account has no email" };
+    }
+
     let user = await User.findOne({ email: googleUser.email });
     if (!user) {
       // user = new User({

@@ -1,4 +1,7 @@
 import User, { IUser } from '../models/user.model';
+import { UserResponseDTO } from '../dto/user.dto';
+import { IRoleDTO } from '../dto/role.dto';
+import Role from '../models/role.model';
 
 // Mongoose
 // Η .lean() είναι μια επιλογή ερωτήματος που επιστρέφει απλά αντικείμενα JavaScript (POJO) αντί για Mongoose Document. Βελτιώνει σημαντικά την απόδοση και μειώνει τη χρήση μνήμης (συχνά έως και 10 φορές πιο γρήγορα) παρακάμπτοντας την παρακολούθηση αλλαγών και την επικύρωση του Mongoose, καθιστώντας την ιδανική για αιτήματα GET μόνο για ανάγνωση.
@@ -6,16 +9,25 @@ import User, { IUser } from '../models/user.model';
 // Δίνει καλύτερο TypeScript typing: Χωρίς .exec() → Mongoose δίνει περίεργους τύπους (Query<T>), Με .exec() → παίρνεις Promise<T>
 // Αποφεύγει silent errors: Χωρίς .exec(), κάποια errors εμφανίζονται αργότερα ή σιωπηλά. Με .exec(), τα errors είναι predictable.
 
-export const findAll = async (): Promise<IUser[]> => {
-  return await User.find().populate('roles').lean().exec();
+export const findAll = async (): Promise<UserResponseDTO[]> => {
+  return User.find({}, { password: 0 })
+    .populate<{ roles: IRoleDTO[] }>({ path: "roles", model: Role })
+    .lean()
+    .exec();
 };
 
-export const findById = async (id: string): Promise<IUser | null> => {
-  return await User.findById(id).populate('roles').lean().exec();
+export const findById = async (id: string): Promise<UserResponseDTO | null> => {
+  return await User.findById(id, { password: 0 })
+    .populate<{ roles: IRoleDTO[] }>({ path: "roles", model: Role })
+    .lean()
+    .exec()
 };
 
-export const findByEmail = async (email: string): Promise<IUser | null> => {
-  return await User.findOne({ email:email }).populate('roles').lean().exec();
+export const findByEmail = async (email: string): Promise<UserResponseDTO | null> => {
+  return User.findOne({ email:email }, { password: 0 })
+    .populate<{ roles: IRoleDTO[] }>({ path: "roles", model: Role })
+    .lean()
+    .exec()
 };
 
 export const createUser = async (data: Partial<IUser>): Promise<IUser> => {

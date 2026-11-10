@@ -56,7 +56,12 @@ export const create = async (req: Request, res: Response, next: NextFunction) =>
 
 export const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const username: string = req.params.username!;
+    const param = req.params.username;
+    if (typeof param !== "string") {
+      throw new Error("Expected one username parameter");
+    }
+    const username: string = param;
+
     const data: UpdateUserDTO = req.body;   // <-- DTO, not IUser
 
     const result = await userService.updateUser(username, data);
@@ -73,7 +78,12 @@ export const update = async (req: Request, res: Response, next: NextFunction) =>
 
 export const remove = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const username: string = req.params.username!;
+     const param = req.params.username;
+    if (typeof param !== "string") {
+      throw new Error("Expected one username parameter");
+    }
+    const username: string = param;
+    
     const result = await userService.deleteUser(username);
     if (!result) {
       return res.status(404).json({ message: "User not found" });

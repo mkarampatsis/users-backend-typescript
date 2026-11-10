@@ -1,4 +1,6 @@
-import { RoleDTO } from "./role.dto";
+import { Types } from "mongoose";
+import { IRoleDTO } from "./role.dto";
+// import { RoleDTO } from "./role.dto";
 
 export interface IPhoneDTO {
   type: string;
@@ -37,12 +39,29 @@ export interface UpdateUserDTO {
   roles?: string[]; 
 }
 
+// export interface UserResponseDTO {
+//   id?: string;
+//   username: string;
+//   firstname?: string;
+//   lastname?: string;
+//   email?: string;
+//   address?: {
+//     area?: string;
+//     street?: string;
+//     number?: string;
+//     po?: string;
+//     municipality?: string;
+//   };
+//   phone?: IPhoneDTO[];
+//   roles: RoleDTO[];
+// }
+
 export interface UserResponseDTO {
-  id?: string;
+  _id: Types.ObjectId;
   username: string;
   firstname?: string;
   lastname?: string;
-  email?: string;
+  email: string;
   address?: {
     area?: string;
     street?: string;
@@ -51,5 +70,5 @@ export interface UserResponseDTO {
     municipality?: string;
   };
   phone?: IPhoneDTO[];
-  roles: RoleDTO[];
+  roles: IRoleDTO[];
 }
