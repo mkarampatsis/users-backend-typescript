@@ -18,7 +18,7 @@ export interface IUser extends Document {
 const PhoneSchema = new Schema<IPhone>({ type: String, number: String }, { _id: false });
 
 const UserSchema = new Schema<IUser>({
-  username: { type: String, required: true, unique: true },
+  username: { type: String, required: true, unique: true, maxLength:10, minLength:6 },
   password: { type: String, required: true },
   firstname: String,
   lastname: String,
