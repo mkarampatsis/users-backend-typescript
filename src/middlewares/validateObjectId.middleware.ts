@@ -5,8 +5,7 @@ export const validateObjectId =
   // If no argument is passed when calling validateObjectId(...), use 'id' as the default value
   (param = 'id') => 
     (req: Request, res: Response, next: NextFunction) => {
-      console.log("Validate>>", req.params);
-      const param = req.params.param;
+      const param = req.params.id;
       // const param = req.params[param];
       if (typeof param !== "string") {
         throw new Error("Expected one id parameter");
