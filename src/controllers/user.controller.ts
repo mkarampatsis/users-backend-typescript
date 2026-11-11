@@ -29,6 +29,7 @@ export const getOneById = async (req: Request<{ id: string }>, res: Response, ne
 export const getOneByEmail = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const param = req.params.email;
+    console.log("Email Controller");
     if (typeof param !== "string") {
       throw new Error("Expected one email parameter");
     }

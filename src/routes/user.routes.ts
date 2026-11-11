@@ -5,6 +5,7 @@ import { createUserSchema, updateUserSchema } from '../validators/user.validator
 import { validateObjectId } from '../middlewares/validateObjectId.middleware';
 import { authenticate } from '../middlewares/auth.middleware';
 import { hasAdminRole } from '../middlewares/user.middleware';
+import { validateEmail } from '../middlewares/validateEmail.middleware';
 
 const router = Router();
 
@@ -66,7 +67,7 @@ router.get('/:id', validateObjectId('id'), userCtrl.getOneById);
 *       404:
 *         description: Ο χρήστης δεν βρέθηκε
 */
-router.get('/email/:email', userCtrl.getOneByEmail);
+router.get('/email/:email', validateEmail(), userCtrl.getOneByEmail);
 // router.get('/email/:email', authenticate, hasAdminRole, userCtrl.getOneByEmail);
 
 /**
