@@ -2,7 +2,7 @@ import User from '../models/user.model';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt'
-import AuthPayload from '../models/auth.model';
+import { AuthPayloadDTO } from '../dto/auth.dto';
 import { verifyGoogleIdToken } from '../utils/googleVerify';
 
 dotenv.config();
@@ -24,7 +24,7 @@ export const login = async (username: string, password: string) => {
   const match = await bcrypt.compare(password, user.password);
   if (!match) return null;
   
-  const payload: AuthPayload = { username: user.username, email: user.email || '', roles: user.roles };
+  const payload: AuthPayloadDTO = { username: user.username, email: user.email || '', roles: user.roles };
   const token = jwt.sign(payload as any, JWT_SECRET, { expiresIn: JWT_EXPIRES });
   return { user, token };
 };

@@ -72,7 +72,7 @@ router.post('/login', validate(loginSchema), authCtrl.login);
 *       401:
 *         description: Δεν υπάρχει έγκυρο token
 */
-router.get('/me', authenticate, authCtrl.me); // will be protected at app-level or use authenticate if desired
+// router.get('/me', authenticate, authCtrl.me); // will be protected at app-level or use authenticate if desired
 
 
 /**

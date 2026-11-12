@@ -3,21 +3,21 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
-declare global {
-  namespace Express {
-    interface Request { user?: any }
-  }
-}
+// declare global {
+//   namespace Express {
+//     interface Request { user?: any }
+//   }
+// }
 
 /**
  * Define the structure of your JWT payload here.
  * You can adjust this interface according to what your tokens contain.
  */
-export interface AuthPayload extends JwtPayload {
-  username: string;  // user ID
-  email: string;    // user email
-  role?: string;    // optional: user role, etc.
-}
+// export interface AuthPayload extends JwtPayload {
+//   username: string;  // user ID
+//   email: string;    // user email
+//   role?: string;    // optional: user role, etc.
+// }
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -51,7 +51,7 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
 
   try {
     const payload = jwt.verify(token, JWT_SECRET);
-    req.user = payload;
+    // req.user = payload;
     next();
   } catch (err) {
     res.status(401).json({ message: 'Invalid or expired token' });

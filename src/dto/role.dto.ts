@@ -1,9 +1,3 @@
-// export interface RoleDTO {
-//   id: string;
-//   description: string;
-//   active: boolean;
-// }
-
 import { Types } from "mongoose";
 
 export interface IRoleDTO {

@@ -21,11 +21,11 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
   } catch (err) { next(err); }
 };
 
-export const me = async (req: Request, res: Response, _next: NextFunction) => {
-  console.log("Me>>",req.user);
-  if (!req.user) return res.status(401).json({ message: 'Not authenticated' });
-  res.json(req.user);
-};
+// export const me = async (req: Request, res: Response, _next: NextFunction) => {
+//   console.log("Me>>",req.user);
+//   if (!req.user) return res.status(401).json({ message: 'Not authenticated' });
+//   res.json(req.user);
+// };
 
 export const googleLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
